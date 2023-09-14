@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateUserDataActivity">
+
+    <EditText
+        android:id="@+id/et_updateUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="@+id/btn_backUpdateUserData"
+        app:layout_constraintTop_toBottomOf="@+id/btn_backUpdateUserData" />
+
+    <EditText
+        android:id="@+id/et_updateUserInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="User Info"
+        app:layout_constraintStart_toStartOf="@+id/et_updateUserName"
+        app:layout_constraintTop_toBottomOf="@+id/et_updateUserName" />
+
+    <Button
+        android:id="@+id/btn_updateUserData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Update"
+        app:layout_constraintEnd_toEndOf="@+id/et_updateUserInfo"
+        app:layout_constraintStart_toStartOf="@+id/et_updateUserInfo"
+        app:layout_constraintTop_toBottomOf="@+id/et_updateUserInfo" />
+
+    <Button
+        android:id="@+id/btn_backUpdateUserData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

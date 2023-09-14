@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageButton
+        android:id="@+id/btn_backFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="Wähle eine Kategorie"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/btn_backFilter"
+        app:layout_constraintTop_toBottomOf="@+id/btn_backFilter" />
+
+    <RadioGroup
+        android:id="@+id/rg_Kategorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+        <RadioButton
+            android:id="@+id/rb_Alles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alles in meiner Umgebung" />
+
+        <RadioButton
+            android:id="@+id/rb_Sport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sport" />
+
+        <RadioButton
+            android:id="@+id/rb_Nachtleben"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nachtleben" />
+
+        <RadioButton
+            android:id="@+id/rb_Verteiler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Verteiler" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Datum"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/rg_Kategorie"
+        app:layout_constraintTop_toBottomOf="@+id/rg_Kategorie" />
+
+    <RadioGroup
+        android:id="@+id/rg_Datum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <RadioButton
+            android:id="@+id/rb_Heute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Heute" />
+
+        <RadioButton
+            android:id="@+id/rb_Morgen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Morgen" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_FilterOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Anwenden"
+        app:layout_constraintStart_toStartOf="@+id/rg_Datum"
+        app:layout_constraintTop_toBottomOf="@+id/rg_Datum" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
