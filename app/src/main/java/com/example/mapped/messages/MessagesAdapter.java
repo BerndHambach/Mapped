@@ -2,7 +2,6 @@ package com.example.mapped.messages;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mapped.ChatActivity;
 import com.example.mapped.R;
 import com.example.mapped.UserModel;
-import com.example.mapped.chat.Chat;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHolder> {
     ArrayList<UserModel> usersArrayList;
     Context context;
-    Uri uri;
 
 
     // Constructor for initialization
@@ -55,7 +53,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, Chat.class);
+                Intent intent = new Intent(context, ChatActivity.class);
                 intent.putExtra("id", userModel.getUserId());
                 context.startActivity(intent);
             }

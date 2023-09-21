@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,57 +27,74 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder> {
-    private List<Messages> userMessagesList;
+    private List<MessageModel> userMessagesList;
     Context context;
 
     private FirebaseAuth mAuth;
     private DatabaseReference usersRef;
-    Uri uri;
+    private FirebaseUser fuser;
+    public static final int MSG_TYPE_LEFT = 0;
+    public static final int MSG_TYPE_RIGHT = 1;
 
 
     // Constructor for initialization
-    public MessagesAdapter(List<Messages> userMessagesList) {
+    public MessagesAdapter(List<MessageModel> userMessagesList) {
         this.userMessagesList = userMessagesList;
     }
 
     public class MessageViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView senderMessageText, receiverMessageText;
-        public CircleImageView receiverProfileImage;
-        private LinearLayout main;
+        public TextView show_message, txt_seen;
+        public CircleImageView profile_image;
+
 
         public MessageViewHolder(View view) {
             super(view);
 
-            senderMessageText = (TextView) view.findViewById(R.id.sender_message_text);
-            receiverMessageText = (TextView) view.findViewById(R.id.receiver_message_text);
-            receiverProfileImage = (CircleImageView) view.findViewById(R.id.message_profile_image);
+            show_message= (TextView) view.findViewById(R.id.show_message);
+            txt_seen= (TextView) view.findViewById(R.id.txt_seen);
+
+            profile_image = (CircleImageView) view.findViewById(R.id.profile_image);
 
         }
     }
 
-
-
-
     @NonNull
     @Override
-    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.custom_messages_layout, viewGroup, false);
+    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
-        mAuth = FirebaseAuth.getInstance();
-
-        return new MessageViewHolder(view);
+        if (viewType == MSG_TYPE_RIGHT) {
+            View view = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.chat_item_right, viewGroup, false);
+            return new MessageViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.chat_item_left, viewGroup, false);
+            return new MessageViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
 
-        String messageSenderId = mAuth.getCurrentUser().getUid();
-        Messages messages = userMessagesList.get(position);
+        String messageSenderId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        MessageModel message = userMessagesList.get(position);
 
-        String fromUserID = messages.getFrom();
-        String fromMessagesType = messages.getType();
+        holder.show_message.setText(message.getMessage());
+
+        String fromUserID = message.getFrom();
+        String fromMessagesType = message.getType();
+
+        if (position == userMessagesList.size()-1){
+            if(message.isIsseen()) {
+                holder.txt_seen.setText("Seen");
+            } else {
+                holder.txt_seen.setText("Delivered");
+            }
+        }else {
+            holder.txt_seen.setVisibility(View.GONE);
+        }
+
 
         usersRef = FirebaseDatabase.getInstance().getReference().child("users").child(fromUserID);
 
@@ -96,7 +114,9 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             }
         });
 
-        if (fromMessagesType.equals("text")){
+
+
+        /*if (fromMessagesType.equals("text")){
 
             holder.receiverMessageText.setVisibility(View.INVISIBLE);
             holder.receiverProfileImage.setVisibility(View.INVISIBLE);
@@ -120,7 +140,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
                 holder.receiverMessageText.setText(messages.getMessage());
             }
 
-        }
+        }*/
     }
 
     @Override
@@ -128,6 +148,16 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         // Returns number of items
         // currently available in Adapter
         return userMessagesList.size();
+    }
+    @Override
+    public int getItemViewType(int position) {
+
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        if (userMessagesList.get(position).getFrom().equals(fuser.getUid())){
+            return MSG_TYPE_RIGHT;
+        } else {
+            return MSG_TYPE_LEFT;
+        }
     }
 
     // Initializing the Views

@@ -25,10 +25,10 @@ public class ChatsFragment extends Fragment {
 
     private View privateChatsView;
     private RecyclerView chatsRecyclerList;
-    public ArrayList<UserModel> chatsList;
+    public ArrayList<UserModel> chatsList, usersList;
     private FirebaseAuth mAuth;
     private String currentUserID;
-    DatabaseReference chatsRef, usersChatsRef;
+    DatabaseReference chatsRef, usersChatsRef, unseenMessageRef;
     private ChatsAdapter chatsAdapter;
     private ArrayList<String> chats_contactsID_List;
 
@@ -52,10 +52,11 @@ public class ChatsFragment extends Fragment {
 
         chatsRef = FirebaseDatabase.getInstance().getReference().child("Contacts").child(currentUserID);
         usersChatsRef = FirebaseDatabase.getInstance().getReference().child("users");
-
+        unseenMessageRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(currentUserID);
 
         chatsList = new ArrayList<>();
         chats_contactsID_List = new ArrayList<>();
+        usersList = new ArrayList<>();
        // request_usersID_List = new ArrayList<>();
 
         chatsRef.addValueEventListener(new ValueEventListener() {
@@ -72,18 +73,20 @@ public class ChatsFragment extends Fragment {
                 usersChatsRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             UserModel user = dataSnapshot.getValue(UserModel.class);
-                            chatsList.add(user);
+                            usersList.add(user);
                         }
-                            /*for (int i = 0; i<request_usersID_List.size(); i++) {
-                                if(request_usersID_List.get(i)== snapshot.getKey()){
-                                    UserModel requestUser = snapshot.getValue(UserModel.class);
-                                    requestsList.add(requestUser);
+
+
+                        for (int i = 0; i < usersList.size(); i++) {
+                            if (chats_contactsID_List.contains(usersList.get(i).getUserId())){
+                                UserModel friend = usersList.get(i);
+                                  chatsList.add(friend);
                                 }
-                            }*/
-                        chatsAdapter = new ChatsAdapter(getContext(), chatsList);
+                        }
+                        chatsAdapter = new ChatsAdapter(getContext(), chatsList, true);
                         chatsRecyclerList.setAdapter(chatsAdapter);
                     }
 
@@ -102,4 +105,5 @@ public class ChatsFragment extends Fragment {
 
         return privateChatsView;
     }
+
 }

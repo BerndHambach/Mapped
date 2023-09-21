@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-     >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,6 +21,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:src="@drawable/person_icon" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:textColor="@color/theme_color_80"
             android:textSize="14sp"/>
     </LinearLayout>
-    
+
     <TextView
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -69,5 +69,6 @@
         android:id="@+id/unseenMessages"/>
 
 </RelativeLayout>
-</LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

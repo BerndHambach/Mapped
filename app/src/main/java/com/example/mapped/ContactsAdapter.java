@@ -41,7 +41,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
     @Override
     public ContactsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.user_row, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.contacts_row, parent, false);
         return new ContactsAdapter.MyViewHolder(view);
     }
 
@@ -51,6 +51,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
         UserModel userModel = list.get(position);
 
         holder.name.setText(userModel.getUserName());
+        holder.info.setText(userModel.getUserInfo());
         // holder.email.setText(userModel.getUserEmail());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -74,10 +75,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.MyView
         return list.size();
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, email;
+        public TextView name, info;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.userName);
+            name = itemView.findViewById(R.id.username);
+            info = itemView.findViewById(R.id.userinfo);
             //email = itemView.findViewById(R.id.userEmail);
 
         }

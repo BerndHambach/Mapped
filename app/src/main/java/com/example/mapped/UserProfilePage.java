@@ -313,6 +313,7 @@ public class UserProfilePage extends AppCompatActivity {
                                                                             public void onComplete(@NonNull Task<Void> task) {
 
                                                                                 if(task.isSuccessful()){
+
                                                                                     btn_SendMessage.setEnabled(true);
                                                                                     current_State = "request_sent";
                                                                                     btn_SendMessage.setText("Cancel Chat Request");

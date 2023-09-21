@@ -45,6 +45,12 @@
         android:layout_height="wrap_content"
         android:text="TextView" />
 
+    <ImageButton
+        android:id="@+id/ib_SavePlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/favorite_24" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_Profile"
         android:layout_width="match_parent"

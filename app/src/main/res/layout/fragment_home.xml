@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,22 +13,65 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:focusable="true"/>
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+    </org.osmdroid.views.MapView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInfoMarker"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_gravity="left|bottom"
         android:backgroundTint="@color/black"
-        android:layout_gravity="left|bottom"/>
+        app:layout_constraintBottom_toBottomOf="@+id/mapView"
+        app:layout_constraintEnd_toEndOf="@+id/mapView"
+        app:layout_constraintStart_toStartOf="@+id/mapView" />
+
+    <EditText
+        android:id="@+id/et_searchmap"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:background="#28F473"
+        android:shadowColor="#4CAF50"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/btn_searchmap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
+        android:layout_margin="16dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:src="@drawable/baseline_filter_alt_24"
-        android:layout_margin="16dp" />
+        app:layout_constraintBottom_toTopOf="@+id/rvInfoMarker"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_navtocurrentlocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:src="@drawable/osm_ic_center_map"
+        app:layout_constraintBottom_toTopOf="@+id/fab"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</FrameLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_searchmap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="#4CAF50"
+        android:src="@drawable/search_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mapView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

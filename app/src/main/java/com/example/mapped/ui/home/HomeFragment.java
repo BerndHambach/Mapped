@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mapped.Adapter;
 import com.example.mapped.CreateHangoutActivity;
 import com.example.mapped.FilterMapActivity;
-import com.example.mapped.Place;
+import com.example.mapped.PlaceModel;
 import com.example.mapped.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -80,14 +81,14 @@ public class HomeFragment extends Fragment {
     private DatabaseReference mdatabaseReference;
     private DatabaseReference categoriesdbr;
 
-    public List<Place> placesList;
-    public List<Place> allPlacesList;
+    public List<PlaceModel> placesList;
+    public List<PlaceModel> allPlacesList;
 
 
     public FloatingActionButton kategoriesbutton;
     public ImageView imageMarker;
     public String markerImageUri;
-    public ArrayList<Place> placesArrayList;
+    public ArrayList<PlaceModel> placesArrayList;
     public ArrayList<String> categoriesArrayList;
     public RecyclerView rvMarkerInfo;
 
@@ -95,7 +96,7 @@ public class HomeFragment extends Fragment {
 
     RecyclerView.Adapter adapter;
 
-    FloatingActionButton btnFilter;
+    FloatingActionButton btnFilter, btnNavBackToCurrentLocation, btnSearch;
     AlertDialog chooseCategorieAlertDialog;
 
     String selectedCategorie;
@@ -108,6 +109,7 @@ public class HomeFragment extends Fragment {
     public int sizeOverlays;
     //public String[] categoriesList;
     public String categorie;
+    public EditText et_searchmap;
 
     public String[] categoriesList = {"Alles im meiner Umgebung", "Sport", "Verteiler", "Nachtleben"};
 
@@ -121,10 +123,9 @@ public class HomeFragment extends Fragment {
         showMap(map);
         navigateToCurrentLocation();
 
-
-        placesList = new ArrayList<Place>();
-        placesArrayList = new ArrayList<Place>();
-        allPlacesList = new ArrayList<Place>();
+        placesList = new ArrayList<PlaceModel>();
+        placesArrayList = new ArrayList<PlaceModel>();
+        allPlacesList = new ArrayList<PlaceModel>();
 
         categoriesArrayList = new ArrayList<String>();
 
@@ -141,7 +142,11 @@ public class HomeFragment extends Fragment {
         today = (dayOfMonth + "/" + (month + 1) + "/" + year);
         selectedDate = today;
 
+        et_searchmap = root.findViewById(R.id.et_searchmap);
+
         btnFilter = root.findViewById(R.id.fab);
+        btnNavBackToCurrentLocation =root.findViewById(R.id.btn_navtocurrentlocation);
+        btnSearch = root.findViewById(R.id.btn_searchmap);
 
         // rvMarkerInfo = (RecyclerView) root.findViewById(R.id.rvInfoMarker);
         recyclerView = (RecyclerView) root.findViewById(R.id.rvInfoMarker);
@@ -170,25 +175,6 @@ public class HomeFragment extends Fragment {
         mfirebaseDatabase = FirebaseDatabase.getInstance();
         mdatabaseReference = mfirebaseDatabase.getReference("Places");
 
-        /*categoriesdbr = mfirebaseDatabase.getReference("Categories");
-        categoriesdbr.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot != null && snapshot.getValue() != null) {
-
-                        categorie = snapshot.getValue().toString();
-                        categoriesArrayList.add(categorie);
-                       // categoriesList.
-                        Toast.makeText(getView().getContext(), "categorieslist befüllt", Toast.LENGTH_SHORT).show();
-                }
-                    Toast.makeText(getView().getContext(), "categorieslist befüllt", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
         addAllPlacesToMap(selectedCategorie, selectedDate);
 
 
@@ -197,91 +183,31 @@ public class HomeFragment extends Fragment {
            public void onClick(View view) {
                Intent intent = new Intent(getContext(), FilterMapActivity.class);
                startActivityForResult(intent, MY_REQUEST_CODE);
-
-               /*AlertDialog.Builder builder = new AlertDialog.Builder(root.getContext());
-               builder.setTitle("Filter");
-
-               final View filterLayout = getLayoutInflater().inflate(R.layout.filter_layout, null);
-               builder.setView(filterLayout);
-
-               // add a button
-               builder.setPositiveButton("OK", (dialog, which) -> {
-                   // send data from the AlertDialog to the Activity
-                   //EditText editText = customLayout.findViewById(R.id.editText);
-                   //sendDialogDataToActivity(editText.getText().toString());
-               });
-               // create and show the alert dialog
-               AlertDialog dialog = builder.create();
-               dialog.show();*/
            }
        });
-       /*btnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //final String[] kategorieItems = {"Alles in meiner Nähe", "Sport", "Nachtleben", "Verteiler"};
+       btnNavBackToCurrentLocation.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               map.getController().setCenter(standort);
+           }
+       });
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(root.getContext());
-                builder.setTitle("Wähle eine Kategorie");
-                builder.setSingleChoiceItems(categoriesList, -1, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
+       btnSearch.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
 
-                        switch(item)
-                        {
-                            case 0:
-                                selectedCategorie = categoriesList[0];
-                                break;
-                            case 1:
-                                // Your code when 2nd  option seletced
-                                selectedCategorie = categoriesList[1];
-                                break;
-                            case 2:
-                                // Your code when 3rd option seletced
-                                selectedCategorie = categoriesList[2];
-                                break;
-                            case 3:
-                                // Your code when 3rd option seletced
-                                selectedCategorie = categoriesList[3];
-                                break;
+               int s = et_searchmap.getVisibility();
 
-                        }
-                        String mselectedCategorie = selectedCategorie;
-                        chooseCategorieAlertDialog.dismiss();
-                        sizeOverlays = map.getOverlayManager().overlays().size();
+                if (s == 8) {
+                    et_searchmap.setVisibility(View.VISIBLE);
+                } else if (s != 8){
+                    et_searchmap.setVisibility(View.GONE);
+                }
+               }
+       });
 
-                        for (int a = 2; a < sizeOverlays; a++)
-                        {
-                            map.getOverlayManager().remove(2);
-                        }
-                        //sizeOverlays = 0;
-                        addAllPlacesToMap(selectedCategorie, selectedDate);
-                    }
-                });
-                chooseCategorieAlertDialog = builder.create();
-                chooseCategorieAlertDialog.show();
-
-            }
-
-       });*/
         return root;
     }
-
-    /*private void showFilterMapDialog() {
-        //before inflating the custom alert dialog layout, we will get the current activity viewgroup
-        ViewGroup viewGroup = getView().findViewById(android.R.id.content);
-
-        //then we will inflate the custom alert dialog xml that we created
-        View dialogView = LayoutInflater.from(getActivity()).inflate(R.layout.filter_layout, viewGroup, false);
-
-        //Now we need an AlertDialog.Builder object
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        //setting the view of the builder to our custom view that we already inflated
-        builder.setView(dialogView);
-
-        //finally creating the alert dialog and displaying it
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }*/
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -296,6 +222,7 @@ public class HomeFragment extends Fragment {
                     {
                         map.getOverlayManager().remove(2);
                     }
+
                     addAllPlacesToMap(categoriefilter, datefilter);
 
                 }
@@ -313,18 +240,14 @@ public class HomeFragment extends Fragment {
 
                     for (DataSnapshot placeSnapshot : snapshot.getChildren()) {
 
-                        Place place = placeSnapshot.getValue(Place.class);
-
+                        PlaceModel place = placeSnapshot.getValue(PlaceModel.class);
                         placesArrayList.add(place);
                     }
-                    //fillAllPlacesList();
-
                     allPlacesToMap(filterByCategorie, filterByDate);
 
                     adapter = new Adapter(getView().getContext(), placesArrayList);
                     // Setting Adapter to RecyclerView
                     recyclerView.setAdapter(adapter);
-
                 }
             }
             @Override
@@ -335,9 +258,11 @@ public class HomeFragment extends Fragment {
     }
     private void allPlacesToMap(String categorieFilter, String dateFilter) {
 
+
         for (int i = 0; i < placesArrayList.size(); i++) {
 
-            if (placesArrayList.get(i).getDate().equals(dateFilter) && categorieFilter.equals("Alles in meiner Umgebung")) {
+            if (placesArrayList.get(i).getDate().equals(dateFilter) && categorieFilter.equals("Alles in meiner Umgebung"))
+            {
                 Marker marker = new Marker(map);
                 GeoPoint markerGeopoint = new GeoPoint(placesArrayList.get(i).getLatitude(), placesArrayList.get(i).getLongitude());
                 marker.setPosition(markerGeopoint);
@@ -352,16 +277,15 @@ public class HomeFragment extends Fragment {
                 // marker.setIcon(this.getResources().getDrawable(R.drawable.ic_your_location));
                 map.getOverlays().add(marker);
 
-                marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+               /* marker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker, MapView mapView) {
 
                         Toast.makeText(getView().getContext(), "Marker clicked", Toast.LENGTH_SHORT).show();
                         return false;
                     }
-                });
+                });*/
             }
-
             else if (placesArrayList.get(i).getDate().equals(dateFilter) && placesArrayList.get(i).getCategorie().equals(categorieFilter))
             {
                 Marker marker = new Marker(map);
@@ -386,7 +310,21 @@ public class HomeFragment extends Fragment {
                     }
                 });
             }
+            else
+            {
+                placesArrayList.remove(i);
+            }
         }
+
+       /* int size = map.getOverlays().size();
+
+        String s = "s";
+        for (int a = 1; a < map.getOverlays().size(); a++) {
+           map.getOverlayManager().overlays().get(a).
+            // Marker marker = map.getOverlays().get(a);*/
+
+
+
     }
     @Override
     public void onViewCreated(View view, Bundle saveInstanceState) {

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/myplacescard_view"
+    android:layout_margin="5dp"
+    card_view:cardBackgroundColor="#ffffff"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="3dp"
+    card_view:contentPadding="4dp"
+    android:foreground="?selectableItemBackground"
+    android:clickable="true" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="300dp"
+            android:maxWidth="300dp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/con_layout">
+
+            <!--For image src we have used ic_launcher
+            and for text "courseName" they are used
+            only for reference how it will looks"-->
+            <ImageView
+                android:id="@+id/myplaceImg"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:padding="8dp"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:srcCompat="@drawable/place_24" />
+
+
+            <TextView
+                android:id="@+id/myplaceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:maxLines="1"
+                android:text="title"
+                android:textStyle="bold"
+                card_view:layout_constraintStart_toEndOf="@+id/myplaceImg"
+                card_view:layout_constraintTop_toTopOf="@+id/myplaceImg" />
+
+            <TextView
+                android:id="@+id/myplaceDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:maxLines="2"
+                android:text="description"
+                card_view:layout_constraintStart_toEndOf="@+id/myplaceImg"
+                card_view:layout_constraintTop_toBottomOf="@+id/myplaceTitle" />
+
+            <TextView
+                android:id="@+id/tv_myPlaceDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Datum"
+                card_view:layout_constraintStart_toStartOf="@+id/myplaceDescription"
+                card_view:layout_constraintTop_toBottomOf="@+id/myplaceDescription" />
+
+            <TextView
+                android:id="@+id/tv_myPlaceTimeSpan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Timespan"
+                card_view:layout_constraintStart_toEndOf="@+id/tv_myPlaceDate"
+                card_view:layout_constraintTop_toTopOf="@+id/tv_myPlaceDate" />
+
+            <TextView
+                android:id="@+id/tv_myPlaceCategorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:text="Categorie"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageButton
+            android:id="@+id/ib_deletemyplace"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/delete_24"
+            android:backgroundTint="@color/white"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+
+

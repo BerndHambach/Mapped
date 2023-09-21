@@ -2,17 +2,13 @@ package com.example.mapped;
 
 
 
-import static android.content.Intent.getIntent;
-
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.Transliterator;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,16 +22,20 @@ import java.util.ArrayList;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     //ArrayList courseImg, courseName;
 
-    ArrayList<Place> placeArrayList;
+    ArrayList<PlaceModel> placeArrayList;
     Context context;
     Uri uri;
 
 
     // Constructor for initialization
-    public Adapter(Context context, ArrayList<Place> placeArrayList) {
+    public Adapter(Context context, ArrayList<PlaceModel> placeArrayList) {
         this.context = context;
         this.placeArrayList = placeArrayList;
 
+    }
+    public void clear() {
+        placeArrayList.clear();
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -81,9 +81,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         //LinearLayout layout_place;
         public ViewHolder(View view) {
             super(view);
-            images = (ImageView) view.findViewById(R.id.placeImg);
-            title = (TextView) view.findViewById(R.id.placeTitle);
-            time = (TextView) view.findViewById(R.id.placeStartTime);
+            images = (ImageView) view.findViewById(R.id.myplaceImg);
+            title = (TextView) view.findViewById(R.id.myplaceTitle);
+            time = (TextView) view.findViewById(R.id.myplaceDescription);
            // layout_place = (LinearLayout) view.findViewById(R.id.layout_place);
             context = view.getContext();
             view.setOnClickListener(this);
@@ -93,7 +93,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public void onClick(View view) {
 
             int i = getAbsoluteAdapterPosition();
-            Place place = placeArrayList.get(i);
+            PlaceModel place = placeArrayList.get(i);
             Toast.makeText(view.getContext(), "Item clicked", Toast.LENGTH_SHORT).show();
            Intent intent = new Intent(context, PlaceInfoActivity.class);
            intent.putExtra("PLACE", place);

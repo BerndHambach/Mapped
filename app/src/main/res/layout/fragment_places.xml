@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".ui.MyPlaces.PlacesFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,16 +24,16 @@
             android:background="@drawable/round_back_light_10"/>
 
         <TextView
-             android:layout_height="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Nachrichten"
+            android:text="Places"
             android:textColor="#424242"
             android:textStyle="bold"
             android:layout_centerInParent="true"
             android:textSize="18dp"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userProfilePic"
+            android:id="@+id/myplacesuserProfilePic"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="20dp"
@@ -45,33 +45,22 @@
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
+        android:id="@+id/placestabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#AA4343"
         app:tabGravity="fill"
         app:tabMode="fixed" />
 
-    <Button
-        android:id="@+id/btn_FindFriends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Find Friends" />
-
-    <Button
-        android:id="@+id/btn_CreateGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Group" />
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
+        android:id="@+id/placesviewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-   <!-- <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/usersRecyclerView"/>-->
+    <!-- <androidx.recyclerview.widget.RecyclerView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:id="@+id/usersRecyclerView"/>-->
 </LinearLayout>

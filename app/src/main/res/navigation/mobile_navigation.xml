@@ -12,10 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.mapped.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_myplaces"
+        android:name="com.example.mapped.ui.MyPlaces.PlacesFragment"
+        android:label="My Places"
+        tools:layout="@layout/fragment_places" />
+
+    <fragment
+        android:id="@+id/navigation_messaging"
+        android:name="com.example.mapped.ui.messaging.MessagingFragment"
+        android:label="Messaging"
+        tools:layout="@layout/fragment_messages" />
 
     <fragment
         android:id="@+id/navigation_profil"

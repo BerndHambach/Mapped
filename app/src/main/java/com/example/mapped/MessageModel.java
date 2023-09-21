@@ -2,33 +2,26 @@ package com.example.mapped;
 
 public class MessageModel {
 
-    private String msgId;
-    private String senderId;
-    private String message;
+    private String from, message, type;
+    private boolean isseen;
 
-    public MessageModel(String msgId, String senderId, String message) {
-        this.msgId = msgId;
-        this.senderId = senderId;
+    public MessageModel () {
+
+    }
+
+    public MessageModel(String from, String message, String type, boolean isseen) {
+        this.from = from;
         this.message = message;
+        this.type = type;
+        this.isseen = isseen;
     }
 
-    public MessageModel() {
+    public String getFrom() {
+        return from;
     }
 
-    public String getMsgId() {
-        return msgId;
-    }
-
-    public void setMsgId(String msgId) {
-        this.msgId = msgId;
-    }
-
-    public String getSenderId() {
-        return senderId;
-    }
-
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     public String getMessage() {
@@ -37,5 +30,21 @@ public class MessageModel {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean isIsseen() {
+        return isseen;
+    }
+
+    public void setIsseen(boolean isseen) {
+        this.isseen = isseen;
     }
 }

@@ -24,7 +24,7 @@
         and for text "courseName" they are used
         only for reference how it will looks"-->
     <ImageView
-        android:id="@+id/placeImg"
+        android:id="@+id/myplaceImg"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:padding="8dp"/>
@@ -37,13 +37,13 @@
         android:layout_marginRight="16dp"
         android:layout_gravity="center">
         <TextView
-            android:id="@+id/placeTitle"
+            android:id="@+id/myplaceTitle"
             android:text="courseName"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:id="@+id/placeStartTime"
+            android:id="@+id/myplaceDescription"
             android:text="courseName"
             android:textStyle="bold"
             android:layout_width="wrap_content"

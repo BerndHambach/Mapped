@@ -2,11 +2,9 @@ package com.example.mapped;
 
 //import com.google.firebase.database.DatabaseReference;
 
-import android.net.Uri;
-
 import java.io.Serializable;
 
-public class Place implements Serializable {
+public class PlaceModel implements Serializable {
     public String title;
     public String description;
     public Double latitude;
@@ -21,11 +19,11 @@ public class Place implements Serializable {
     public String placeID;
 
 
-    public Place() {
+    public PlaceModel() {
 
     }
 
-    public Place(String title, String description, Double latitude, Double longitude, String categorie, String imageUrl, String startTime, String endTime, String date, String userID) {
+    public PlaceModel(String title, String description, Double latitude, Double longitude, String categorie, String imageUrl, String startTime, String endTime, String date, String userID, String placeID) {
         this.title = title;
         this.description = description;
         this.latitude = latitude;
@@ -39,8 +37,9 @@ public class Place implements Serializable {
         this.endTime = endTime;
         this.date = date;
         this.userID = userID;
+        this.placeID = placeID;
     }
-    public Place(String title, String description, Double latitude, Double longitude, String imageUrl, String startTime) {
+    public PlaceModel(String title, String description, Double latitude, Double longitude, String imageUrl, String startTime) {
         this.title = title;
         this.description = description;
         this.latitude = latitude;
@@ -138,5 +137,11 @@ public class Place implements Serializable {
         this.userID = userID;
     }
 
+    public String getPlaceID() {
+        return placeID;
+    }
 
+    public void setPlaceID(String placeID) {
+        this.placeID = placeID;
+    }
 }

@@ -10,6 +10,12 @@
     <color name="theme_color">#2176FF</color>
     <color name="theme_color_80">#CC2176FF</color>
     <color name="theme_color_8">#142176FF</color>
+    <color name="yellow_inaktiv">#FFEB3B</color>
+    <color name="green_aktiv">#8BC34A</color>
+    <color name="red_inpast">#FF5722</color>
+
+
+
 
     <color name="colorPrimary">#FF40C4FF</color>
     <color name="colorPrimaryDark">#FF40C4FF</color>

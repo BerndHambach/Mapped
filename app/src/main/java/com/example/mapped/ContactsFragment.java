@@ -48,8 +48,7 @@ public class ContactsFragment extends Fragment {
         // Inflate the layout for this fragment
         contactsView = inflater.inflate(R.layout.fragment_contacts, container, false);
 
-        myContactList = (RecyclerView) contactsView.findViewById(R.id.contacts_list);
-        myContactList.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
@@ -74,7 +73,7 @@ public class ContactsFragment extends Fragment {
 
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
-                    String userKey = snapshot.getKey();
+                    String userKey = dataSnapshot.getKey();
                     contactsIDList.add(userKey);
 
                 }
@@ -82,16 +81,27 @@ public class ContactsFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot usersnapshot) {
 
+                        ArrayList<UserModel> usersList = new ArrayList<>();
                         for (DataSnapshot dataSnapshot : usersnapshot.getChildren()) {
 
-                            String userID = dataSnapshot.getKey();
+                            UserModel user = dataSnapshot.getValue(UserModel.class);
+                            usersList.add(user);
+                        }
+
+                        for (int i = 0; i < usersList.size(); i++) {
+
+                            if(contactsIDList.contains(usersList.get(i).getUserId())){
+                                UserModel contact = usersList.get(i);
+                                contactsList.add(contact);
+                            }
+                        }
+                           /* String userID = dataSnapshot.getKey();
                             if(contactsIDList.contains(currentUserID)) {
 
                                 UserModel contact = dataSnapshot.getValue(UserModel.class);
                                 contactsList.add(contact);
-                                String s = "s";
-                            }
 
+                            }
                             /*for (int i = 0; i < contactsIDList.size(); i ++) {
                                 if(contactsIDList.get(i).toString() == dataSnapshot.getKey()) {
                                     UserModel contact = dataSnapshot.getValue(UserModel.class);
@@ -99,10 +109,11 @@ public class ContactsFragment extends Fragment {
                                 }
 
                             }*/
-                        }
+
+                        String s = "s";
                         contactsAdapter = new ContactsAdapter(getContext(), contactsList);
                         myContactList.setAdapter(contactsAdapter);
-                        String s = "s";
+
 
 
                     }

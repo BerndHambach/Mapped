@@ -11,14 +11,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mapped.Place;
-import com.example.mapped.PlaceInfoActivity;
 import com.example.mapped.R;
 import com.example.mapped.UserModel;
 import com.example.mapped.UserProfilePage;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
 

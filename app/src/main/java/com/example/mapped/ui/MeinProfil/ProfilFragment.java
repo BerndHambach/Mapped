@@ -180,7 +180,7 @@ public class ProfilFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(root.getContext(), LoginActivity.class);
+                Intent intent = new Intent(root.getContext(), LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 getActivity().finish();
             }

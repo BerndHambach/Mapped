@@ -1,7 +1,6 @@
 package com.example.mapped;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -9,7 +8,6 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,8 +20,6 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -36,7 +32,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +49,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -84,7 +80,8 @@ public class CreateHangoutActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
 
     private FirebaseDatabase mfirebaseDatabase;
-    private DatabaseReference mdatabaseReference;
+    private DatabaseReference mdatabaseReference, usersPlacesRef;
+
 
     private FirebaseStorage mfirebaseStorage;
     private StorageReference mstorageReference;
@@ -92,7 +89,7 @@ public class CreateHangoutActivity extends AppCompatActivity {
     private FirebaseUser user;
     public File takenPhotoFile;
     public Uri takenPhotoUri;
-    Place newplace;
+    PlaceModel newplace;
     AlertDialog selectCategorieAlertDialog;
 
 
@@ -142,6 +139,10 @@ public class CreateHangoutActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                        // btnSelectDate.setText(day + "/" + month + "/" + year);
+
+                       // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                       // Date strDate = sdf.parse(String.valueOf(calendar.getTime()));
+
                         btnSelectDate.setText(day + "/" + (month + 1) + "/" + year);
                         date = btnSelectDate.getText().toString();
                     }
@@ -214,6 +215,10 @@ public class CreateHangoutActivity extends AppCompatActivity {
         mfirebaseStorage = FirebaseStorage.getInstance();
         mstorageReference = mfirebaseStorage.getReference();
 
+        usersPlacesRef = FirebaseDatabase.getInstance().getReference("Users Places");
+
+
+
         sc_Profile = (SwitchCompat) findViewById(R.id.sc_Profile);
         sc_Profile.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -230,32 +235,32 @@ public class CreateHangoutActivity extends AppCompatActivity {
                 description = etDescriptionPlace.getText().toString();
                 categorie = selectedCategorie;
 
+                String currentUserID = user.getUid();
                 Boolean rb = placeWithProfile;
 
                 if (rb == true) {
                     userID = user.getUid();
                 }
 
+                GregorianCalendar GregPlaceStart = new GregorianCalendar(year, month, dayOfMonth, starthour, startminute);
 
                 uploadImageToFirebase(takenPhotoFile.getName(), takenPhotoUri);
 
                 //uploadPicture();
 
-               // StorageReference fileRef = mstorageReference.child.
+                if (starthour >= endhour ) {
+                    Toast.makeText(CreateHangoutActivity.this, "End must be after Start", Toast.LENGTH_SHORT).show();
+                } else {
 
-                //mstorageReference.putFile(currentPhotoPath);
+                    String key = mdatabaseReference.push().getKey();
+                    PlaceModel newplace = new PlaceModel(title, description, latitude, longitude, categorie, takenPhotoUri.toString(), startTime, endTime, date, userID, key);
+
+                    mdatabaseReference.child("Places").child(key).setValue(newplace);
+                    usersPlacesRef.child(currentUserID).child("My Places").child(key).setValue(newplace);
 
 
-                mdatabaseReference.child("Places").push().setValue(new Place(title, description, latitude, longitude, categorie, takenPhotoUri.toString(), startTime, endTime, date, userID));
-                /*if (categorie == "Sport")
-                mdatabaseReference.child("Places").child("Sport").push().setValue(new Place(title, description, latitude, longitude));
-
-                if (categorie == "Verteiler")
-                    mdatabaseReference.child("Places").child("Verteiler").push().setValue(new Place(title, description, latitude, longitude));
-
-                if (categorie == "Nachtleben")
-                    mdatabaseReference.child("Places").child("Nachtleben").push().setValue(new Place(title, description, latitude, longitude));*/
-                finish();
+                    finish();
+                }
 
             }
         });

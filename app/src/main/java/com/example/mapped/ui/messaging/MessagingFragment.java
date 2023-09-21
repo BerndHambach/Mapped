@@ -1,12 +1,10 @@
-package com.example.mapped.ui.dashboard;
+package com.example.mapped.ui.messaging;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -14,45 +12,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.BinderThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.mapped.FindFriendsActivity;
-import com.example.mapped.MessagesTapFragment;
 import com.example.mapped.MessagesTapsAdapter;
 import com.example.mapped.TabsAccessorAdapter;
+import com.example.mapped.databinding.FragmentMessagingBinding;
 import com.example.mapped.messages.MessagesAdapter;
 import com.example.mapped.R;
 import com.example.mapped.UserModel;
-import com.example.mapped.databinding.FragmentDashboardBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class DashboardFragment extends Fragment {
+public class MessagingFragment extends Fragment {
 
 
     private int unseenMessages = 0;
@@ -66,7 +50,7 @@ public class DashboardFragment extends Fragment {
     RecyclerView recyclerView;
 
     RecyclerView.Adapter friendsAdapter;
-    private FragmentDashboardBinding binding;
+    private FragmentMessagingBinding binding;
     public ArrayList<UserModel> usersArrayList;
     FirebaseAuth fbAuth;
     FirebaseUser currentUser;
@@ -95,7 +79,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        return inflater.inflate(R.layout.fragment_messaging, container, false);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle saveInstanceState) {

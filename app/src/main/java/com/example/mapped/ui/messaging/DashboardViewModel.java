@@ -1,4 +1,4 @@
-package com.example.mapped.ui.dashboard;
+package com.example.mapped.ui.messaging;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".UpdateMyPlaceActivity">
+
+
+    <ImageButton
+        android:id="@+id/btn_backUpdateMyPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_icon" />
+
+    <Button
+        android:id="@+id/update_dateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Datum"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_backUpdateMyPlace" />
+
+    <Button
+        android:id="@+id/update_startTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:onClick="popStartTimePicker"
+        android:text="Beginn"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@+id/update_dateButton"
+        app:layout_constraintTop_toTopOf="@+id/update_dateButton" />
+
+    <Button
+        android:id="@+id/update_endTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:onClick="popEndTimePicker"
+        android:text="Ende"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toRightOf="@+id/update_startTimeButton"
+        app:layout_constraintTop_toTopOf="@+id/update_startTimeButton" />
+
+    <Button
+        android:id="@+id/BtnUpdateCategorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Kategorie"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/update_endTimeButton"
+        app:layout_constraintTop_toBottomOf="@+id/update_endTimeButton" />
+
+    <Button
+        android:id="@+id/update_cameraButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Foto"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/BtnUpdateCategorie"
+        app:layout_constraintTop_toTopOf="@+id/myplaceImage" />
+
+    <Button
+        android:id="@+id/update_galleryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Galerie"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/update_cameraButton"
+        app:layout_constraintTop_toBottomOf="@+id/update_cameraButton" />
+
+    <Button
+        android:id="@+id/updatePlace_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="Update"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/myplaceImage"
+        app:layout_constraintStart_toEndOf="@+id/myplaceImage" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/myplaceTitle"
+        android:layout_width="wrap_content"
+        android:maxWidth="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:text="Title"
+        app:layout_constraintStart_toStartOf="@+id/update_dateButton"
+        app:layout_constraintTop_toBottomOf="@+id/update_dateButton" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/myplaceDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="300dp"
+        android:layout_marginTop="15dp"
+        android:textSize="25sp"
+        android:text="Description"
+        app:layout_constraintStart_toStartOf="@+id/myplaceTitle"
+        app:layout_constraintTop_toBottomOf="@+id/myplaceTitle" />
+
+    <ImageView
+        android:id="@+id/myplaceImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@+id/myplaceDescription"
+        app:layout_constraintTop_toBottomOf="@+id/myplaceDescription"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_Profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myplaceImage">
+
+        <TextView
+            android:id="@+id/userProfileNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:text="Name"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userProfilePicImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="8dp"
+            android:maxWidth="50dp"
+            android:maxHeight="50dp"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
+            android:src="@drawable/person_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

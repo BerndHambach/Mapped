@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -96,8 +97,14 @@ public class RegisterActivity extends AppCompatActivity {
                         UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
                         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                         firebaseUser.updateProfile(userProfileChangeRequest);
-                        UserModel userModel = new UserModel(FirebaseAuth.getInstance().getUid(),name, email, password, "", "");
+                        UserModel userModel = new UserModel(FirebaseAuth.getInstance().getUid(),name, email, password, "", "", "offline", name.toLowerCase(),"");
                         mfbreference.child(FirebaseAuth.getInstance().getUid()).setValue(userModel);
+
+                        String currentUserID = mAuth.getCurrentUser().getUid();
+                        String deviceToken = FirebaseMessaging.getInstance().getToken().toString();
+
+                        mfbreference.child(currentUserID).child("device_token")
+                                        .setValue(deviceToken);
                         sendUserToNextActivity();
                         finish();
                     }
