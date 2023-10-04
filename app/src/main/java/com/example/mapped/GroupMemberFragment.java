@@ -132,7 +132,7 @@ public class GroupMemberFragment extends Fragment implements ContactItemInterfac
                         }
 
                         groupContactAdapter.setArrayList(contactsList);
-                        //myContactList.setAdapter(groupContactAdapter);
+                        myContactList.setAdapter(groupContactAdapter);
 
                     }
 

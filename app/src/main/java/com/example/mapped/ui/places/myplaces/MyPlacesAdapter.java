@@ -43,23 +43,21 @@ public class MyPlacesAdapter extends RecyclerView.Adapter<MyPlacesAdapter.MyView
 
     private String currentUserId;
     Calendar calendar = Calendar.getInstance();
-    Date today = Calendar.getInstance().getTime();
-    int todayday = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-    int todaymonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
-    int todayyear = calendar.get(Calendar.YEAR);
+
 
     GregorianCalendar gregCalendar = (GregorianCalendar) GregorianCalendar.getInstance();
-    Date gregtoday = gregCalendar.getTime();
-    int gregtodayminute = gregCalendar.get(gregCalendar.MINUTE);
-    int am_or_pm = gregCalendar.get(gregCalendar.AM_PM);
-    int gregtodyhour = gregCalendar.get(gregCalendar.HOUR);
+
+    Date datenow;
 
 
 
     public MyPlacesAdapter(Context context, ArrayList<PlaceModel> list) {
         this.context = context;
         this.list = list;
+        datenow = gregCalendar.getTime();
+
     }
+
 
     public void add(PlaceModel placeModel){
         list.add(placeModel);
@@ -85,56 +83,25 @@ public class MyPlacesAdapter extends RecyclerView.Adapter<MyPlacesAdapter.MyView
         PlaceModel placeModel = list.get(position);
 
         //int date = Integer.parseInt(placeModel.getDate());
-        String placedate = placeModel.getDate();
-        String[] arrSplit_2 = placedate.split("/");
+        Date placeDateStart = placeModel.getDateStart();
+        Date placeDateEnd = placeModel.getDateEnd();
 
-        String placeDay = arrSplit_2[0];
-        int pDay = Integer.parseInt(placeDay);
+           if (datenow.after(placeDateEnd) && datenow.after(placeDateStart)) {
+                holder.con_layout.setBackgroundColor(context.getResources().getColor(R.color.red_inpast));
+            }
+            if (datenow.before(placeDateStart)) {
+                holder.con_layout.setBackgroundColor(context.getResources().getColor(R.color.yellow_inaktiv));
+            }
 
-        String placeMonth = arrSplit_2[1];
-        int pMonth = Integer.parseInt(placeMonth);
+            holder.title.setText(placeModel.getTitle());
+            holder.description.setText(placeModel.getDescription());
+            holder.categorie.setText(placeModel.getCategorie());
+            holder.date.setText(placeModel.getDate());
+            holder.timespan.setText(placeModel.getStartTime() + " - " + placeModel.getEndTime());
 
-        String placeYear = arrSplit_2[2];
-        int pYear = Integer.parseInt(placeYear);
+            Uri uri = Uri.parse(placeModel.getImageUrl());
+            holder.image.setImageURI(uri);
 
-        String placeStartTime = placeModel.getStartTime();
-        String[] arrSplit_placeStartTime = placeStartTime.split(":");
-        String placeStartHour = arrSplit_placeStartTime[0];
-        int pStartHour = Integer.parseInt(placeStartHour);
-        String placeStartMinute = arrSplit_placeStartTime[1];
-        int pStartMinute = Integer.parseInt(placeStartMinute);
-
-        String placeEndTime = placeModel.getEndTime();
-        String[] arrSplit_placeEndTime = placeEndTime.split(":");
-        String placeEndHour = arrSplit_placeEndTime[0];
-        int pEndHour = Integer.parseInt(placeEndHour);
-        String placeEndMinute = arrSplit_placeEndTime[1];
-        int pEndMinute = Integer.parseInt(placeEndMinute);
-
-
-        if(am_or_pm == 1) {
-            gregtodyhour = gregtodyhour + 12;
-        }
-
-
-        if(pDay < todayday || pEndHour < gregtodyhour || (pEndHour == gregtodyhour && pEndMinute < gregtodayminute) ) {
-            holder.con_layout.setBackgroundColor(context.getResources().getColor(R.color.red_inpast));
-        }
-        /*if(pDay == todayday){
-            holder.con_layout.setBackgroundColor(context.getResources().getColor(R.color.green_aktiv));
-        }
-        if(pDay > todayday){
-            holder.con_layout.setBackgroundColor(context.getResources().getColor(R.color.yellow_inaktiv));
-        }*/
-
-        holder.title.setText(placeModel.getTitle());
-        holder.description.setText(placeModel.getDescription());
-        holder.categorie.setText(placeModel.getCategorie());
-        holder.date.setText(placeModel.getDate());
-        holder.timespan.setText(placeModel.getStartTime() + " - " + placeModel.getEndTime());
-
-        Uri uri = Uri.parse(placeModel.getImageUrl());
-        holder.image.setImageURI(uri);
 
 
 
