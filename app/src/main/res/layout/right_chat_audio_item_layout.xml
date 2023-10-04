@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="8dp"
+    android:layout_height="wrap_content">
+
+
+    <me.jagar.chatvoiceplayerlibrary.VoicePlayerView
+        android:id="@+id/voicePlayerView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:enableVisualizer="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_time_audio"
+        app:layout_constraintEnd_toStartOf="@+id/tv_time_audio"
+        app:layout_constraintTop_toTopOf="parent"
+        app:playPauseBackgroundColor="#ff7700"
+        app:playPauseCornerRadius="100"
+        app:playProgressbarColor="#ff7700"
+        app:progressTimeColor="#000"
+        app:seekBarProgressColor="#000"
+        app:seekBarThumbColor="#FFC107"
+        app:shareBackgroundColor="#ff7700"
+        app:shareCornerRadius="100"
+        app:shareText="SHARE ME"
+        app:showShareButton="true"
+        app:showTiming="true"
+        app:timingBackgroundColor="#6AFF7700"
+        app:viewBackground="#C6C4CF"
+        app:viewCornerRadius="100"
+        app:visualizationNotPlayedColor="#727171"
+        app:visualizationPlayedColor="#ff7700">
+
+    </me.jagar.chatvoiceplayerlibrary.VoicePlayerView>
+
+    <TextView
+        android:id="@+id/txt_seen_audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="seen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_time_audio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_right"
+        android:text="time"
+        app:layout_constraintBottom_toTopOf="@+id/txt_seen_audio"
+        app:layout_constraintEnd_toEndOf="@+id/txt_seen_audio" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

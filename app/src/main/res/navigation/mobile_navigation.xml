@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.mapped.ui.home.HomeFragment"
+        android:name="com.example.mapped.ui.findplaces.FindPlacesFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_myplaces"
-        android:name="com.example.mapped.ui.MyPlaces.PlacesFragment"
+        android:name="com.example.mapped.ui.places.PlacesFragment"
         android:label="My Places"
         tools:layout="@layout/fragment_places" />
 
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_profil"
-        android:name="com.example.mapped.ui.MeinProfil.ProfilFragment"
+        android:name="com.example.mapped.ui.profil.ProfilFragment"
         android:label="Profil"
         tools:layout="@layout/fragment_profil" />
 </navigation>

@@ -3,6 +3,7 @@ package com.example.mapped;
 //import com.google.firebase.database.DatabaseReference;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class PlaceModel implements Serializable {
     public String title;
@@ -17,20 +18,23 @@ public class PlaceModel implements Serializable {
 
     public String userID;
     public String placeID;
+    public Date dateStart;
+    public Date dateEnd;
+    public String videoUri;
 
 
     public PlaceModel() {
 
     }
 
-    public PlaceModel(String title, String description, Double latitude, Double longitude, String categorie, String imageUrl, String startTime, String endTime, String date, String userID, String placeID) {
+    public PlaceModel(String title, String description, Double latitude, Double longitude, String categorie, String imageUrl, String startTime, String endTime, String date, String userID, String placeID, Date dateStart, Date dateEnd, String videoUri) {
         this.title = title;
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
         this.categorie = categorie;
-       // this.startTime = startTime;
-       // this.endTime = endTime;
+        // this.startTime = startTime;
+        // this.endTime = endTime;
         this.imageUrl = imageUrl;
         //this.imageUri = imageUri;
         this.startTime = startTime;
@@ -38,6 +42,9 @@ public class PlaceModel implements Serializable {
         this.date = date;
         this.userID = userID;
         this.placeID = placeID;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.videoUri = videoUri;
     }
     public PlaceModel(String title, String description, Double latitude, Double longitude, String imageUrl, String startTime) {
         this.title = title;
@@ -143,5 +150,29 @@ public class PlaceModel implements Serializable {
 
     public void setPlaceID(String placeID) {
         this.placeID = placeID;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public String getVideoUri() {
+        return videoUri;
+    }
+
+    public void setVideoUri(String videoUri) {
+        this.videoUri = videoUri;
     }
 }

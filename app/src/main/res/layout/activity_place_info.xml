@@ -1,64 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".PlaceInfoActivity">
+    tools:context=".ui.findplaces.PlaceInfoActivity">
 
 
     <ImageButton
         android:id="@+id/btn_backPlaceInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_icon" />
+
+    <TextView
+        android:id="@+id/placeInfoDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:text="Datum und Uhrzeit"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_backPlaceInfo"
+        app:layout_constraintTop_toBottomOf="@+id/btn_backPlaceInfo" />
+
+    <TextView
+        android:id="@+id/placeInfoCategorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="Categorie"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/placeInfoDate"
+        app:layout_constraintStart_toEndOf="@+id/placeInfoDate" />
 
     <TextView
         android:id="@+id/placeInfoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginTop="10dp"
+        android:text="Titel"
+        android:textSize="25dp"
+        app:layout_constraintLeft_toLeftOf="@+id/placeInfoDate"
+        app:layout_constraintTop_toBottomOf="@+id/placeInfoDate" />
 
     <TextView
         android:id="@+id/placeInfoDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginTop="10dp"
+        android:text="Description"
+        android:textSize="22dp"
+        app:layout_constraintLeft_toLeftOf="@+id/placeInfoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/placeInfoTitle" />
 
     <ImageView
         android:id="@+id/placeInfoImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/placeInfoDescription"
+        app:layout_constraintTop_toBottomOf="@+id/placeInfoDescription"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/placeInfoDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/placeInfoTimespan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
     <ImageButton
         android:id="@+id/ib_SavePlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_backPlaceInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/favorite_24" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_Profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:clickable="true"
         android:orientation="horizontal"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="@+id/placeInfoImage"
+        app:layout_constraintTop_toBottomOf="@+id/btn_watchvideo">
 
         <TextView
             android:id="@+id/userProfileNameTextView"
@@ -100,4 +133,21 @@
             app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+
+    <VideoView
+        android:id="@+id/placeVideoView"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/placeInfoImage"
+        app:layout_constraintStart_toEndOf="@+id/placeInfoImage" />
+
+    <Button
+        android:id="@+id/btn_watchvideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play"
+        app:layout_constraintEnd_toEndOf="@+id/placeVideoView"
+        app:layout_constraintStart_toStartOf="@+id/placeVideoView"
+        app:layout_constraintTop_toBottomOf="@+id/placeVideoView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

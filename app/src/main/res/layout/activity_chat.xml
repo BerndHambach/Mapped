@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.Chat">
+    tools:context=".ui.messaging.chats.ChatActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,38 +67,84 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_above="@id/rl_send"
+        android:layout_above="@id/cl_send"
         android:layout_below="@id/rl_user" />
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/theme_color_8"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:id="@+id/rl_send">
+        android:id="@+id/cl_send">
 
         <EditText
             android:id="@+id/chats_EditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
             android:backgroundTint="@android:color/transparent"
+            android:hint="Type something..."
             android:textSize="14sp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginStart="20dp"
-            android:layout_toStartOf="@+id/chats_sendBtn"
-            android:hint="Type something..."/>
-        
+            app:layout_constraintBottom_toBottomOf="@+id/cv_chooseVideo"
+            app:layout_constraintEnd_toStartOf="@+id/chats_sendBtn"
+            app:layout_constraintLeft_toRightOf="@+id/cv_chooseVideo" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/chats_sendBtn"
-            android:src="@drawable/send_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/send_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </RelativeLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cv_chooseFoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:src="@android:drawable/ic_menu_camera"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cv_chooseVideo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@android:drawable/presence_video_away"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_chooseFoto"
+            app:layout_constraintLeft_toRightOf="@+id/cv_chooseFoto" />
+
+        <com.devlomi.record_view.RecordButton
+            android:id="@+id/btn_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/mic_background"
+            android:tint="@color/theme_color_8"
+            app:layout_constraintBottom_toBottomOf="@+id/chats_sendBtn"
+            app:layout_constraintEnd_toStartOf="@+id/chats_sendBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mic_icon="@drawable/mic_24" />
+
+        <com.devlomi.record_view.RecordView
+            android:id="@+id/recordView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_record"
+            app:layout_constraintEnd_toEndOf="@+id/btn_record"
+            app:layout_constraintTop_toTopOf="@+id/btn_record"
+            app:slide_to_cancel_arrow="@drawable/back_icon"
+            app:slide_to_cancel_arrow_color="@color/black"
+            app:slide_to_cancel_text="Slide to cancel" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

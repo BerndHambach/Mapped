@@ -19,9 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.mapped.FindFriendsActivity;
-import com.example.mapped.MessagesTapsAdapter;
-import com.example.mapped.TabsAccessorAdapter;
+import com.example.mapped.CreateGroupActivity;
 import com.example.mapped.databinding.FragmentMessagingBinding;
 import com.example.mapped.messages.MessagesAdapter;
 import com.example.mapped.R;
@@ -110,7 +108,8 @@ public class MessagingFragment extends Fragment {
         btn_CreateGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RequestNewGroup();
+                SendUserToCreateGroupActivity();
+                //RequestNewGroup();
             }
         });
 
@@ -208,5 +207,9 @@ public class MessagingFragment extends Fragment {
     public void SendUserToFriendsActivity() {
         Intent findFriendIntent = new Intent(getContext(), FindFriendsActivity.class);
         startActivity(findFriendIntent);
+    }
+    public void SendUserToCreateGroupActivity () {
+        Intent createGroupIntent = new Intent(getContext(), CreateGroupActivity.class);
+        startActivity(createGroupIntent);
     }
 }

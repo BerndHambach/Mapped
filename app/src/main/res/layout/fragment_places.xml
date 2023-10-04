@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
-    tools:context=".ui.MyPlaces.PlacesFragment">
+    tools:context=".ui.places.PlacesFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

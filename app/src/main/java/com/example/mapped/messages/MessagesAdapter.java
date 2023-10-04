@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mapped.ChatActivity;
+import com.example.mapped.ui.messaging.chats.ChatActivity;
 import com.example.mapped.R;
 import com.example.mapped.UserModel;
 

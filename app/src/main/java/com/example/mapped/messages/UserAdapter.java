@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mapped.R;
 import com.example.mapped.UserModel;
-import com.example.mapped.UserProfilePage;
+import com.example.mapped.ui.profil.UserProfilePage;
 
 import java.util.ArrayList;
 

@@ -1,127 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#fff"
-    android:orientation="vertical">
+    >
 
+    <ImageButton
+        android:id="@+id/btn_backCreatePlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:maxWidth="200dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/edittext"
-        android:hint="Titel" />
+        android:hint="Place title"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/dateButton"
+        app:layout_constraintTop_toBottomOf="@+id/dateButton" />
 
-
-    <ImageView
-        android:id="@+id/ImgPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
 
     <EditText
         android:id="@+id/et2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:maxWidth="300dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/edittext"
-        android:hint="Beschreibung" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+        android:hint="Place Description"
+        android:textSize="25sp"
+
+        app:layout_constraintStart_toStartOf="@+id/et"
+        app:layout_constraintTop_toBottomOf="@+id/et" />
+
     <Button
         android:id="@+id/BtnSelectCategorie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kategorie" />
+        android:text="Kategorie"
+        app:layout_constraintStart_toStartOf="@+id/endTimeButton"
+        app:layout_constraintTop_toTopOf="@+id/et" />
+
     <Button
+        android:id="@+id/cameraButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cameraButton"
+        android:layout_marginTop="20dp"
         android:text="Foto"
         android:textSize="20sp"
-        />
+        app:layout_constraintStart_toStartOf="@+id/dateButton"
+        app:layout_constraintTop_toBottomOf="@+id/et2" />
+
     <Button
+        android:id="@+id/galleryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/galleryButton"
         android:text="Galerie"
         android:textSize="20sp"
-        />
-</LinearLayout>
+        app:layout_constraintStart_toStartOf="@+id/cameraButton"
+        app:layout_constraintTop_toBottomOf="@+id/cameraButton" />
 
-    <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/dateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Datum"
-            android:textSize="20sp" />
-
-        <Button
+    <Button
+        android:id="@+id/dateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Datum"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_backCreatePlace"
+        app:layout_constraintTop_toBottomOf="@+id/btn_backCreatePlace" />
+
+    <Button
         android:id="@+id/startTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:onClick="popStartTimePicker"
         android:text="Beginn"
         android:textSize="20sp"
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/dateButton"
+        app:layout_constraintStart_toEndOf="@+id/dateButton" />
+
     <Button
+        android:id="@+id/endTimeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/endTimeButton"
+        android:layout_marginStart="10dp"
         android:onClick="popEndTimePicker"
         android:text="Ende"
         android:textSize="20sp"
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/startTimeButton"
+        app:layout_constraintStart_toEndOf="@+id/startTimeButton" />
 
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_recordvideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make Video"
+        app:layout_constraintBottom_toTopOf="@+id/btn_getVideoFromGallery"
+        app:layout_constraintStart_toStartOf="@+id/btn_getVideoFromGallery" />
+
+    <Button
+        android:id="@+id/btn_getVideoFromGallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:text="Video from Gallery"
+        app:layout_constraintBottom_toBottomOf="@+id/galleryButton"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/sc_Profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Profil anzeigen" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Show contact?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+         />
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/displayImageView"
-        >
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/galleryButton"
+        app:layout_constraintTop_toBottomOf="@+id/galleryButton">
 
-    </ImageView>
+        <ImageView
+            android:id="@+id/displayImageView"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:visibility="gone"
+            android:adjustViewBounds="true" />
+
+        <ImageView
+            android:id="@+id/vv_showrecordedvideo"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:visibility="gone"
+            android:src="@drawable/favorite_green_24" />
+    </LinearLayout>
 
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sc_Profile">
 
         <Button
             android:id="@+id/btnok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button"
-            android:textSize="20sp"
             android:text="OK"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btncancel"
@@ -131,11 +188,11 @@
             android:background="@drawable/button_yellow"
             android:gravity="center_vertical|center_horizontal"
             android:text="Cancel"
-            android:textSize="20sp"
-            android:textColor="#ffffffff" />
+            android:textColor="#ffffffff"
+            android:textSize="20sp" />
 
 
     </LinearLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
