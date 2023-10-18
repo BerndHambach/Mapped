@@ -392,7 +392,7 @@ public class ChatActivity extends AppCompatActivity {
     private void askCameraPermissions() {
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
-        }else {
+        } else {
             dispatchTakePictureIntent();
         }
     }

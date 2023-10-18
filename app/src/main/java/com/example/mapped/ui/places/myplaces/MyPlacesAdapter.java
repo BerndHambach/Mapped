@@ -4,6 +4,7 @@ package com.example.mapped.ui.places.myplaces;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,12 +99,10 @@ public class MyPlacesAdapter extends RecyclerView.Adapter<MyPlacesAdapter.MyView
             holder.categorie.setText(placeModel.getCategorie());
             holder.date.setText(placeModel.getDate());
             holder.timespan.setText(placeModel.getStartTime() + " - " + placeModel.getEndTime());
-
-            Uri uri = Uri.parse(placeModel.getImageUrl());
-            holder.image.setImageURI(uri);
-
-
-
+            if (placeModel.getImageUrl() != null) {
+                Uri uri = Uri.parse(placeModel.getImageUrl());
+                holder.image.setImageURI(uri);
+            }
 
         holder.iv_deletemyplace.setOnClickListener(new View.OnClickListener() {
             @Override

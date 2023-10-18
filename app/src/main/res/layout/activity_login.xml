@@ -11,21 +11,27 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/background">
 
 
             <TextView
                 android:id="@+id/login_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="136dp"
+                android:layout_marginTop="144dp"
                 android:text="LOGIN"
+                android:textColor="#EDEAEA"
+                android:textColorHighlight="#302E2E"
+                android:textColorLink="#F8F5F5"
                 android:textSize="44sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,20 +40,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/input_bg"
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:drawableLeft="@drawable/baseline_email_24"
-                android:drawablePadding="10dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="13dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="13dp"
+                android:textColor="#F8F3F3"
+                android:textColorHint="#FFF9F9"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login_tv" />
 
@@ -57,15 +66,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/input_bg"
+                android:drawableLeft="@drawable/baseline_security_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
                 android:ems="10"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:paddingLeft="20dp"
-                android:drawableLeft="@drawable/baseline_security_24"
-                android:drawablePadding="10dp"
                 android:paddingTop="13dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="13dp"
+                android:textColorHint="#F4F3F3"
                 app:layout_constraintEnd_toEndOf="@+id/inputEmail"
                 app:layout_constraintStart_toStartOf="@+id/inputEmail"
                 app:layout_constraintTop_toBottomOf="@+id/inputEmail" />
@@ -74,8 +85,10 @@
                 android:id="@+id/forgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:text="Forgot Password?"
+                android:textColor="#F6F3F3"
+                android:textColorHint="#F8F5F5"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/inputPassword"
                 app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
@@ -84,10 +97,12 @@
                 android:id="@+id/btnLogin"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/input_bg"
+                android:layout_marginTop="152dp"
+                android:backgroundTint="#BF264F"
                 android:text="Login"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/forgotPassword"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/inputPassword"
                 app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
 
@@ -95,10 +110,13 @@
                 android:id="@+id/createNewAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:text="Create new Account?"
+                android:textColor="#F6F3F3"
+                android:textColorHint="#F8F4F4"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="@+id/btnLogin"
                 app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
@@ -106,15 +124,54 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="8dp"
                 android:text="Or"
+                android:textColor="#F6F0F0"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/createNewAccount" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="66dp"
+                android:layout_height="51dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.712"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/baseline_book_24"
+                app:tint="@color/white"/>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="60dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="108dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/baseline_book_24"
+                app:tint="@color/white"/>
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="55dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                app:layout_constraintHorizontal_bias="0.947"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:srcCompat="@drawable/baseline_book_24"
+                app:tint="@color/white"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
